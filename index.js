@@ -24,6 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 const PORT = 3001
 app.listen(PORT, () => {
