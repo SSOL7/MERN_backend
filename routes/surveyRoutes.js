@@ -7,19 +7,20 @@ const Survey = mongoose.model('surveys');
 
 module.exports = app => {
     app.get('/api/surveys/thanks', (req, res) => {
-        res.send('Tankh you angel');
+        res.send('Thank you angel');
     });
 
     app.post('/api/surveys', requireLogin, async (req, res) => {
-        const { title, subject, body, recipients } = req.body;
+        const body = req.body;
 
         const survey = new Survey({
-            title,
-            subject,
-            body,
-            recipients: recipients.split(',').map(email => ({ email: email.trim() })),
+            title: body.title,
+            subject: body.subject,
+            body: new Date().toLocaleString('fi-FI'),
+            // recipients: recipients.split(',').map(email => ({ email: email.trim() })),
             _user: req.user.id,
             dateSent: Date.now()
+            
         });
 
         try {
